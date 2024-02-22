@@ -20,8 +20,8 @@ export const segRepository = {
           const connectionDB = await db.pool.connect();
           const query: QueryConfig = {
             text: `
-            INSERT INTO SEG_TUSUARIOS (USUV_USERNAME,USUV_NOMBRE,USUV_PASSWORD,USUV_APELLIDO,USUV_CORREO,USUV_ROLES) 
-            VALUES ($1,$2,$3,$4,$5,$6)
+            INSERT INTO SEG_TUSUARIOS (USUV_USERNAME,USUV_NOMBRE,USUV_PASSWORD,USUV_APELLIDO,USUV_CORREO,USUV_ROLES,USUV_ESTADO) 
+            VALUES ($1,$2,$3,$4,$5,$6,'ACTIVO')
             `,
             values: [username,nombre,password,apellido,correo,roles],
           };
@@ -47,7 +47,7 @@ export const segRepository = {
           const connectionDB = await db.pool.connect();
           const query: QueryConfig = {
             text: `
-            SELECT USUN_ID,USUV_USERNAME,USUV_NOMBRE,USUV_APELLIDO,USUV_CORREO,USUV_ROLES 
+            SELECT USUN_ID,USUV_USERNAME,USUV_NOMBRE,USUV_APELLIDO,USUV_CORREO,USUV_ROLES,USUV_ESTADO,USUV_PASSWORD
             FROM SEG_TUSUARIOS 
             WHERE USUV_USERNAME = $1
             `,

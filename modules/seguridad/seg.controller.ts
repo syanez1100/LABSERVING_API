@@ -5,6 +5,12 @@ import { segService } from "./seg.services";
 
 const httpResponses = new HttpResponses();
 
+export const login = catchAsyncErrors(async (req: Request,res: Response) => {
+    const usuario = req.body;
+    const result = await segService.login(usuario.username);
+    httpResponses.Ok(res,"Usuario autenticado correctamente.",result);
+});
+
 export const postUsuario = catchAsyncErrors(async (req: Request,res: Response) => {
     const usuario = req.body;
     const result = await segService.usuario(usuario);
@@ -13,8 +19,7 @@ export const postUsuario = catchAsyncErrors(async (req: Request,res: Response) =
 });
 
 export const getUsuario = catchAsyncErrors(async (req: Request,res: Response) => {
-    const { username,password } = req.body;
+    const { username } = req.body;
     const result = await segService.usuarioByUsername(username);
-
     httpResponses.Ok(res,"Usuario obtenido correctamente.",result);
 });

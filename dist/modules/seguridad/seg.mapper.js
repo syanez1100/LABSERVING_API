@@ -10,7 +10,9 @@ function usuarioMapper(usuarios) {
         nombre: usuario.usuv_nombre,
         apellido: usuario.usuv_apellido,
         correo: usuario.usuv_correo,
-        roles: usuario.usuv_roles
+        roles: usuario.usuv_roles,
+        estado: usuario.usuv_estado,
+        password: usuario.usuv_password,
     }));
 }
 exports.usuarioMapper = usuarioMapper;

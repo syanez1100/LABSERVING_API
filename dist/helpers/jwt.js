@@ -9,11 +9,10 @@ const handleError_1 = require("./handleError");
 const httpResponses_1 = require("./httpResponses");
 const httpResponses = new httpResponses_1.HttpResponses();
 const { JWT_SECRET_KEY, JWT_EXPIRES_IN, JWT_SECRET_KEY_REFRESH, JWT_EXPIRES_IN_REFRESH } = process.env;
-const generarJWT = (uid, username) => {
-    const payload = { uid, username };
+const generarJWT = (username) => {
+    const payload = { username };
     const accessToken = jsonwebtoken_1.default.sign(payload, JWT_SECRET_KEY || "", { expiresIn: JWT_EXPIRES_IN });
-    const refreshToken = jsonwebtoken_1.default.sign(payload, JWT_SECRET_KEY_REFRESH || "", { expiresIn: JWT_EXPIRES_IN_REFRESH });
-    return { accessToken, refreshToken };
+    return { accessToken };
 };
 exports.generarJWT = generarJWT;
 const validarJWT = (token) => {

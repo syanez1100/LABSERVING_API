@@ -9,18 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsuario = exports.postUsuario = void 0;
+exports.getUsuario = exports.postUsuario = exports.login = void 0;
 const catchAsyncErrors_1 = require("../../helpers/catchAsyncErrors");
 const httpResponses_1 = require("../../helpers/httpResponses");
 const seg_services_1 = require("./seg.services");
 const httpResponses = new httpResponses_1.HttpResponses();
+exports.login = (0, catchAsyncErrors_1.catchAsyncErrors)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const usuario = req.body;
+    const result = yield seg_services_1.segService.login(usuario.username);
+    httpResponses.Ok(res, "Usuario autenticado correctamente.", result);
+}));
 exports.postUsuario = (0, catchAsyncErrors_1.catchAsyncErrors)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const usuario = req.body;
     const result = yield seg_services_1.segService.usuario(usuario);
     httpResponses.Ok(res, "Usuario creado correctamente.", result);
 }));
 exports.getUsuario = (0, catchAsyncErrors_1.catchAsyncErrors)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { username, password } = req.body;
+    const { username } = req.body;
     const result = yield seg_services_1.segService.usuarioByUsername(username);
     httpResponses.Ok(res, "Usuario obtenido correctamente.", result);
 }));

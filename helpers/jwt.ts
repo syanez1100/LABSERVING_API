@@ -7,12 +7,11 @@ const httpResponses = new HttpResponses();
 
 const { JWT_SECRET_KEY, JWT_EXPIRES_IN, JWT_SECRET_KEY_REFRESH, JWT_EXPIRES_IN_REFRESH} = process.env;
 
-export const generarJWT = (uid: string,username: string) => {
-  const payload = { uid,username };
+export const generarJWT = (username: string) => {
+  const payload = { username };
 
   const accessToken = jwt.sign(payload, JWT_SECRET_KEY || "", {expiresIn: JWT_EXPIRES_IN});
-  const refreshToken = jwt.sign(payload, JWT_SECRET_KEY_REFRESH || "", { expiresIn: JWT_EXPIRES_IN_REFRESH});
-  return { accessToken, refreshToken };
+  return { accessToken };
 }
 
 export const validarJWT = (token: any) => {
